@@ -1,0 +1,29 @@
+Linux Commands Cheat Sheet (Cloud Perspective)
+Command	Purpose	Cloud Scenario
+top	Show running processes & resource usage	EC2 is slow → check CPU/RAM load
+htop	(Better top) colorful, interactive view	Quickly spot which process eats resources
+df -h	Show disk space usage	App crashed: “No space left” → check disk
+du -sh *	Find large files/folders	Logs/cache filling up root volume
+free -m	Show memory usage	Pod/VM OOM killed → check available memory
+uptime	Show system load & uptime	Before scaling EC2, check load avg
+`ps aux	grep <name>`	Find a process
+ss -tulnp	Show listening ports	Opened SG port 8080 but app not reachable
+curl -I https://site.com	Test connectivity	Check API/website works from VM
+wget <url>	Download file	Install packages from internet on VM
+scp file.txt user@ip:/path/	Copy file to/from remote	Upload WAR/JAR/config to EC2
+rsync -avz src/ user@ip:dest/	Sync directories	Backup logs or sync code
+tar -czvf file.tar.gz dir/	Compress files	Shrink logs before uploading to S3
+tail -f /var/log/app.log	Watch logs live	Debug microservice in real-time
+grep "ERROR" /var/log/app.log	Search logs	Find 500 errors in Nginx logs
+journalctl -xe	Show systemd logs	Debug why service failed to start
+docker ps	List running containers	Check if ECS/Docker container is up
+docker logs <id>	View container logs	Debug failed container task
+kubectl get pods -n ns	List K8s pods	Check pod status in EKS/GKE/AKS
+kubectl logs <pod> -n ns	Show pod logs	Debug crashing pod
+chmod 644 file	Change file permissions	App/webserver can’t read uploaded file
+chown user:group file	Change ownership	Fix permission issues on web/app files
+whoami	Show logged-in user	Check IAM/SSH user on jump host
+id	Show UID, GID, groups	Verify permissions of current user
+history	Show past commands	See what was executed on VM
+sudo ufw status	Show firewall rules	Security group open, but local firewall blocking
+iptables -L -n	List iptables rules	Debug deeper network/firewall issues
